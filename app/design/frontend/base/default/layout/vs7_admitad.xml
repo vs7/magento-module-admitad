@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <checkout_onepage_success>
+        <update handle="admitad_success" />
+    </checkout_onepage_success>
+    <checkout_multishipping_success>
+        <update handle="admitad_success" />
+    </checkout_multishipping_success>
+    <one_click_order_submit_submit>
+        <update handle="admitad_success" />
+    </one_click_order_submit_submit>
+    <checkout_index_fastsave>
+        <update handle="admitad_success" />
+    </checkout_index_fastsave>
+
+    <admitad_success>
+        <reference name="head">
+            <block type="vs7_admitad/order" name="vs7_admitad_multishipping_success" template="vs7_admitad/success.phtml" />
+        </reference>
+    </admitad_success>
+</layout>

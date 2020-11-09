@@ -1,0 +1,36 @@
+<?php
+$campaignCode = '36c5940aaf';
+$orderItemsData = $this->getOrderItemsData();
+if (empty($orderItemsData)) return;
+?>
+<script type="text/javascript">
+    (function (d, w) {
+        w._admitadPixel = {
+            response_type: 'img', // 'script' or 'img'. Default: 'img'
+            action_code: '1',
+            campaign_code: '<?php echo $campaignCode; ?>'
+        };
+        w._admitadPositions = w._admitadPositions || [];
+<?php foreach($orderItemsData as $item): ?>
+        w._admitadPositions.push({
+            <?php foreach($item as $key => $value):?>
+            <?php echo $key . ': \'' . $value . '\','; ?>
+            <?php endforeach; ?>
+        });
+<?php endforeach; ?>
+        var id = '_admitad-pixel';
+        if (d.getElementById(id)) { return; }
+        var s = d.createElement('script');
+        s.id = id;
+        var r = (new Date).getTime();
+        var protocol = (d.location.protocol === 'https:' ? 'https:' : 'http:');
+        s.src = protocol + '//cdn.asbmit.com/static/js/npixel.js?r=' + r;
+        var head = d.getElementsByTagName('head')[0];
+        head.appendChild(s);
+    })(document, window)
+</script>
+<noscript>
+    <?php foreach($orderItemsData as $item): ?>
+    <img src="//ad.admitad.com/r?campaign_code=<?php echo $campaignCode; ?>&action_code=1&<?php echo Mage::helper('vs7_admitad')->getEncodedGetString($item);?>" width="1" height="1" alt="" />
+    <?php endforeach; ?>
+</noscript>
